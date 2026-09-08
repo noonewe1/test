@@ -19,6 +19,6 @@ jobs:
             -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" \
             -H "Accept: application/json" \
             -H "Accept-Language: fa-IR,fa;q=0.9" \
-            https://api.divar.ir/v8/posts-v2/web --max-time 15
+           https://api.divar.ir/v8/posts-v2/web/garEMspT --max-time 15
           echo "----- Response body (first 500 chars) -----"
           head -c 500 response.txt
