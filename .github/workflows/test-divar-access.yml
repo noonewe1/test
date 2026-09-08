@@ -1,0 +1,21 @@
+name: Test Divar Access
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check-access:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show my IP address
+        run: curl -s https://api.ipify.org
+
+      - name: Test divar.ir
+        run: |
+          echo "Testing divar.ir ..."
+          curl -s -o /dev/null -w "Status Code: %{http_code}\nResponse Time: %{time_total}s\n" https://divar.ir --max-time 15
+
+      - name: Test api.divar.ir
+        run: |
+          echo "Testing api.divar.ir ..."
+          curl -s -o /dev/null -w "Status Code: %{http_code}\nResponse Time: %{time_total}s\n" https://api.divar.ir --max-time 15
