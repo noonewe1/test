@@ -1,4 +1,4 @@
-name: Test Divar Access
+name: Test Divar Access v2
 
 on:
   workflow_dispatch:
@@ -10,12 +10,15 @@ jobs:
       - name: Show my IP address
         run: curl -s https://api.ipify.org
 
-      - name: Test divar.ir
+      # 👇 خط REAL_ENDPOINT_HERE رو با آدرس واقعی endpoint که توی n8n استفاده می‌کنی عوض کن
+      # مثال: https://api.divar.ir/v8/postlist/w/search
+      - name: Test the real Divar API endpoint
         run: |
-          echo "Testing divar.ir ..."
-          curl -s -o /dev/null -w "Status Code: %{http_code}\nResponse Time: %{time_total}s\n" https://divar.ir --max-time 15
-
-      - name: Test api.divar.ir
-        run: |
-          echo "Testing api.divar.ir ..."
-          curl -s -o /dev/null -w "Status Code: %{http_code}\nResponse Time: %{time_total}s\n" https://api.divar.ir --max-time 15
+          echo "Testing real endpoint..."
+          curl -s -o response.txt -w "\nStatus Code: %{http_code}\n" \
+            -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" \
+            -H "Accept: application/json" \
+            -H "Accept-Language: fa-IR,fa;q=0.9" \
+            https://api.divar.ir/v8/posts-v2/web --max-time 15
+          echo "----- Response body (first 500 chars) -----"
+          head -c 500 response.txt
